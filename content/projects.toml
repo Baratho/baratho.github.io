@@ -1,0 +1,144 @@
+type = "card"
+title = "Projects"
+description = "Research and engineering projects in robotics, perception, and intelligent systems."
+
+[[items]]
+title = "Snooker-Playing Robot"
+date = "Ongoing"
+content = "We are developing a robot that plays snooker."
+tags = ["Robotics", "Snooker"]
+links = []
+
+[[items.videos]]
+src = "/projects/snooker-demo-1-h264.mp4"
+poster = "/projects/snooker-demo-1-poster.jpg"
+title = "Snooker robot demo 1"
+
+[[items.videos]]
+src = "/projects/snooker-demo-2-h264.mp4"
+poster = "/projects/snooker-demo-2-poster.jpg"
+title = "Snooker robot demo 2"
+
+[[items]]
+title = "Exploring Cross-Participant Transfer in Intracortical Phoneme Decoding"
+date = "Sep - Dec 2025"
+content = "Explored whether a GRU-CTC phoneme decoder pretrained on participant t15 could adapt to intracortical neural recordings from participant t13. Investigated loss-function and architectural modifications by implementing Focal-CTC with gamma warm-up and training diagnostics in PyTorch, and prototyping a Conformer-CTC encoder. Fine-tuning yielded only limited performance improvement (approximately 1% relative) on the target participant's data, highlighting the challenges of transferring learned neural representations across individuals."
+tags = ["PyTorch", "Neural decoding", "Transfer learning"]
+
+[[items]]
+title = "Reservoir Computing for Autonomous Control"
+date = "2025"
+content = "Developed an Echo State Network controller for a beam balance task using PID-generated training data. A reservoir of approximately 700 units achieved stabilization comparable to the PID baseline in simulation; robustness was evaluated under unseen initial conditions and external perturbations."
+tags = ["Reservoir computing", "Control", "ReservoirPy"]
+
+[[items.images]]
+src = "/projects/reservoir-model-tuning.png"
+alt = "Simulated and measured angle responses before and after reservoir model tuning"
+caption = "Angle-response comparison before and after model tuning."
+width = 1625
+height = 615
+
+[[items.images]]
+src = "/projects/reservoir-pid-esn.png"
+alt = "PID and Echo State Network control signals plotted over 500 time steps"
+caption = "PID and ESN control-signal comparison."
+width = 1066
+height = 562
+
+[[items]]
+title = "Pose Graph Optimization for Visuo-tactile Object Tracking"
+date = "2025"
+content = "Improved in-hand object tracking in NeuralFeels using feature-metric registration and global coarse-to-fine registration with Fast Point Feature Histograms."
+tags = ["SLAM", "Visuo-tactile perception", "Registration"]
+
+[[items.images]]
+src = "/projects/visuotactile-cube-grasp.png"
+alt = "A robotic hand grasping a cube with estimated pose axes, comparing ICP, global registration, and feature-metric registration"
+caption = "In-hand cube tracking and pose estimation: ICP, global registration, and FMR."
+width = 2400
+height = 651
+full_width = true
+
+[[items.images]]
+src = "/projects/visuotactile-registration.png"
+alt = "Point-cloud alignment comparison for source and target, ICP, global registration, and FMR"
+caption = "Point-cloud registration: ICP, global registration, and FMR."
+width = 828
+height = 436
+
+[[items.images]]
+src = "/projects/visuotactile-tracking-error.png"
+alt = "Tracking error over time for ICP, global registration, and feature-metric registration"
+caption = "Tracking-error comparison across the three registration methods."
+width = 807
+height = 262
+
+[[items.links]]
+label = "Report (PDF)"
+href = "/projects/visuotactile-tracking-report.pdf"
+
+[[items.links]]
+label = "Code on GitHub"
+href = "https://github.com/yikepan/eecs568_TactileSLAM"
+
+[[items.links]]
+label = "Video demo"
+href = "https://youtu.be/NEvS6-m6ReA"
+
+[[items]]
+title = "Convergence Acceleration for DiffusionDet"
+date = "2025"
+content = "Introduced a heatmap-based detection head and loss for training on the PROPS dataset. Early-stage AP improved by approximately 10 points at 1,000 iterations, and mean per-category AP rose from 62.85 to 69.37."
+tags = ["Object detection", "Computer vision", "Deep learning"]
+
+[[items.images]]
+src = "/projects/diffusiondet-architecture.png"
+alt = "DiffusionDet architecture with an added heatmap head and heatmap loss"
+caption = "Model architecture with the additional heatmap head."
+width = 843
+height = 509
+
+[[items.images]]
+src = "/projects/diffusiondet-detections.png"
+alt = "Object detection results on the PROPS dataset with bounding boxes and confidence scores"
+caption = "Object detection results on the PROPS dataset."
+width = 669
+height = 506
+
+[[items.links]]
+label = "Report (PDF)"
+href = "/projects/diffusiondet-report.pdf"
+
+[[items.links]]
+label = "Code on GitHub"
+href = "https://github.com/fuingcrazy/DiffusionDet-on-PROPS"
+
+[[items]]
+title = "Position Command Rescue System for Firefighters"
+date = "2022 - 2023"
+subtitle = "Team leader, provincial innovative training program"
+content = "Developed a ROS 2-based indoor positioning and visualization system combining IMU and GPS data, Kalman filtering, lidar point-cloud processing, and dead reckoning."
+tags = ["ROS 2", "Localization", "Lidar"]
+
+[[items]]
+title = "Brain Tumor Detection and Segmentation"
+date = "2022 - 2023"
+content = "Prepared brain MRI data and built a convolutional neural network model for glioma detection as part of the Imperial College London Data Science Online Winter School."
+tags = ["Computer vision", "Medical imaging", "CNN"]
+
+[[items]]
+title = "Remote Vital Signs Monitoring System"
+date = "2020 - 2021"
+content = "Developed a monitoring system for elderly people living alone, combining sensors, Arduino and an ESP8266 IoT connection with local and remote alerts."
+tags = ["Embedded systems", "IoT", "Healthcare"]
+
+[[items.images]]
+src = "/projects/vital-signs-system.png"
+alt = "Remote vital signs monitoring architecture connecting a pulse sensor, Arduino, ESP8266, IoT platform, and local and mobile alarms"
+caption = "System architecture for remote vital signs monitoring and alerts."
+width = 1019
+height = 449
+
+[[items.links]]
+label = "Paper (PDF)"
+href = "/papers/remote-vital-signs-monitoring.pdf"

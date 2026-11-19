@@ -12,8 +12,8 @@ interface ThemeStore {
 export const useThemeStore = create<ThemeStore>()(
   persist(
     (set, get) => ({
-      // Default to system preference
-      theme: 'system',
+      // Start in light mode, independently of the operating system theme.
+      theme: 'light',
       setTheme: (theme: Theme) => {
         set({ theme });
         updateTheme(theme);
@@ -28,6 +28,9 @@ export const useThemeStore = create<ThemeStore>()(
     }),
     {
       name: 'theme-storage',
+      version: 1,
+      // Reset the template's saved theme when applying the new light default.
+      migrate: () => ({ theme: 'light' as Theme }),
       storage: createJSONStorage(() => {
         if (typeof window !== 'undefined') {
           return localStorage;

@@ -1,5 +1,3 @@
-I am a PhD student at the School of Science, University of Example, advised by [Prof. Advisor One](https://example.com) and [Dr. Advisor Two](https://example.com).
+I am a robotics algorithm engineer at Motion Brain in Shanghai, where I develop humanoid motion control and manipulation algorithms for industrial tasks. My work includes dual-humanoid coordination and precision assembly.
 
-Prior to this, I obtained a BSc degree with First Class Honours in Natural Science from the University of Example.
-
-My current research focuses on investigating the mathematical principles of natural philosophy.
+I received an M.S. in Electrical and Computer Engineering (Robotics) from the University of Michigan and a B.Eng. in Automation from Central South University. My experience spans robot learning, visuo-tactile perception, autonomous control, and computer vision.

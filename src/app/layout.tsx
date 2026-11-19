@@ -19,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s | ${config.site.title}`,
     },
     description: config.site.description,
-    keywords: [config.author.name, 'PhD', 'Research', config.author.institution],
+    keywords: [config.author.name, 'Robotics', 'Robot Manipulation', config.author.institution],
     authors: [{ name: config.author.name }],
     creator: config.author.name,
     publisher: config.author.name,
@@ -31,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
       locale: openGraphLocale,
       title: config.site.title,
       description: config.site.description,
-      siteName: `${config.author.name}'s Academic Website`,
+      siteName: `${config.author.name}'s Website`,
     },
   };
 }
@@ -129,7 +129,7 @@ export default function RootLayout({
   } = buildLocalizedConfigMaps(targetLocales);
 
   return (
-    <html lang={runtimeI18n.defaultLocale} className="scroll-smooth" suppressHydrationWarning>
+    <html lang={runtimeI18n.defaultLocale} className="scroll-smooth light" suppressHydrationWarning>
       <head>
         <link rel="icon" href={config.site.favicon} type="image/svg+xml" />
         <link rel="dns-prefetch" href="https://jialeliu.com" />
@@ -147,10 +147,11 @@ export default function RootLayout({
               try {
                 const theme = localStorage.getItem('theme-storage');
                 const parsed = theme ? JSON.parse(theme) : null;
-                const setting = parsed?.state?.theme || 'system';
+                const setting = parsed?.version === 1 ? parsed?.state?.theme || 'light' : 'light';
                 const prefersDark = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
                 const effective = setting === 'dark' ? 'dark' : (setting === 'light' ? 'light' : (prefersDark ? 'dark' : 'light'));
                 var root = document.documentElement;
+                root.classList.remove('light', 'dark');
                 root.classList.add(effective);
                 root.setAttribute('data-theme', effective);
               } catch (e) {

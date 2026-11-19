@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
+import Image from 'next/image';
 import { CardPageConfig } from '@/types/page';
 
 const markdownComponents = {
@@ -56,16 +57,45 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
                         transition={{ duration: 0.4, delay: 0.1 * index }}
                         className={`bg-white dark:bg-neutral-900 ${embedded ? "p-4" : "p-6"} rounded-xl shadow-sm border border-neutral-200 dark:border-neutral-800 hover:shadow-lg transition-all duration-200 hover:scale-[1.01]`}
                     >
-                        <div className="flex justify-between items-start mb-2">
+                        <div className="flex justify-between items-start gap-4 mb-2">
                             <h3 className={`${embedded ? "text-lg" : "text-xl"} font-semibold text-primary`}>{item.title}</h3>
                             {item.date && (
-                                <span className="text-sm text-neutral-500 font-medium bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">
+                                <span className="shrink-0 text-sm text-neutral-500 font-medium bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">
                                     {item.date}
                                 </span>
                             )}
                         </div>
                         {item.subtitle && (
                             <p className={`${embedded ? "text-sm" : "text-base"} text-accent font-medium mb-3`}>{item.subtitle}</p>
+                        )}
+                        {item.images && item.images.length > 0 && (
+                            <div className={`grid grid-cols-1 ${item.images.length > 1 ? 'sm:grid-cols-2' : ''} gap-4 my-5`}>
+                                {item.images.map((figure) => (
+                                    <figure key={figure.src} className={`min-w-0 ${figure.full_width && item.images!.length > 1 ? 'sm:col-span-2' : ''}`}>
+                                        <a
+                                            href={figure.src}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            aria-label={`View full-size image: ${figure.alt}`}
+                                            className="block rounded-lg border border-neutral-200 overflow-hidden bg-white focus-visible:outline-2 focus-visible:outline-accent"
+                                        >
+                                            <Image
+                                                src={figure.src}
+                                                alt={figure.alt}
+                                                width={figure.width}
+                                                height={figure.height}
+                                                sizes={figure.full_width ? '(max-width: 895px) 100vw, 800px' : '(max-width: 639px) 100vw, 400px'}
+                                                className={`w-full ${figure.full_width ? 'h-auto' : 'h-56'} object-contain p-3`}
+                                            />
+                                        </a>
+                                        {figure.caption && (
+                                            <figcaption className="mt-2 text-sm text-neutral-500 leading-relaxed">
+                                                {figure.caption}
+                                            </figcaption>
+                                        )}
+                                    </figure>
+                                ))}
+                            </div>
                         )}
                         {item.content && (
                             <div className={`${embedded ? "text-sm" : "text-base"} text-neutral-600 dark:text-neutral-500 leading-relaxed`}>
@@ -74,12 +104,58 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
                                 </ReactMarkdown>
                             </div>
                         )}
+                        {item.videos && item.videos.length > 0 && (
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-5">
+                                {item.videos.map((video) => (
+                                    <figure key={video.src} className="min-w-0">
+                                        <video
+                                            controls
+                                            playsInline
+                                            preload="none"
+                                            poster={video.poster}
+                                            aria-label={`${video.title}: ${item.title}`}
+                                            className="w-full aspect-video rounded-lg bg-black object-contain"
+                                        >
+                                            <source src={video.src} type="video/mp4" />
+                                            Your browser does not support embedded video.
+                                            <a href={video.src}>Open {video.title}</a>
+                                        </video>
+                                        <figcaption className="mt-2 text-sm text-neutral-500 leading-relaxed">
+                                            <a
+                                                href={video.src}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="hover:text-accent underline underline-offset-4"
+                                            >
+                                                {video.title}
+                                            </a>
+                                        </figcaption>
+                                    </figure>
+                                ))}
+                            </div>
+                        )}
                         {item.tags && (
                             <div className="flex flex-wrap gap-2 mt-4">
                                 {item.tags.map(tag => (
                                     <span key={tag} className="text-xs text-neutral-500 bg-neutral-50 dark:bg-neutral-800/50 px-2 py-1 rounded border border-neutral-100 dark:border-neutral-800">
                                         {tag}
                                     </span>
+                                ))}
+                            </div>
+                        )}
+                        {item.links && item.links.length > 0 && (
+                            <div className="flex flex-wrap gap-3 mt-5">
+                                {item.links.map((link) => (
+                                    <a
+                                        key={link.href}
+                                        href={link.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label={`${link.label}: ${item.title}`}
+                                        className="inline-flex items-center rounded-lg border border-accent/40 px-4 py-2 text-sm font-medium text-primary hover:bg-accent/10 transition-colors focus-visible:outline-2 focus-visible:outline-accent"
+                                    >
+                                        {link.label}
+                                    </a>
                                 ))}
                             </div>
                         )}

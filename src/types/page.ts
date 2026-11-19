@@ -22,6 +22,23 @@ export interface CardItem {
     tags?: string[];
     link?: string;
     image?: string;
+    videos?: Array<{
+        src: string;
+        poster?: string;
+        title: string;
+    }>;
+    images?: Array<{
+        src: string;
+        alt: string;
+        caption?: string;
+        full_width?: boolean;
+        width: number;
+        height: number;
+    }>;
+    links?: Array<{
+        label: string;
+        href: string;
+    }>;
 }
 
 export interface CardPageConfig extends BasePageConfig {

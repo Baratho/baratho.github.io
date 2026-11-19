@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
+import { Children } from 'react';
 import { TextPageConfig } from '@/types/page';
 
 interface TextPageProps {
@@ -30,7 +31,29 @@ export default function TextPage({ config, content, embedded = false }: TextPage
                         h1: ({ children }) => <h1 className="text-3xl font-serif font-bold text-primary mt-8 mb-4">{children}</h1>,
                         h2: ({ children }) => <h2 className="text-2xl font-serif font-bold text-primary mt-8 mb-4 border-b border-neutral-200 dark:border-neutral-800 pb-2">{children}</h2>,
                         h3: ({ children }) => <h3 className="text-xl font-semibold text-primary mt-6 mb-3">{children}</h3>,
-                        p: ({ children }) => <p className="mb-4 last:mb-0">{children}</p>,
+                        p: ({ children }) => {
+                            if (config.source === 'cv.md') {
+                                const parts = Children.toArray(children);
+                                const lastPart = parts[parts.length - 1];
+                                const separator = typeof lastPart === 'string' ? lastPart.lastIndexOf(' | ') : -1;
+
+                                if (typeof lastPart === 'string' && separator >= 0) {
+                                    return (
+                                        <p className="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-6 gap-y-1 mb-4 last:mb-0">
+                                            <span className="min-w-0">
+                                                {parts.slice(0, -1)}
+                                                {lastPart.slice(0, separator)}
+                                            </span>
+                                            <span className="justify-self-end text-right whitespace-nowrap tabular-nums text-neutral-500">
+                                                {lastPart.slice(separator + 3)}
+                                            </span>
+                                        </p>
+                                    );
+                                }
+                            }
+
+                            return <p className="mb-4 last:mb-0">{children}</p>;
+                        },
                         ul: ({ children }) => <ul className="list-disc list-inside mb-4 space-y-1 ml-4">{children}</ul>,
                         ol: ({ children }) => <ol className="list-decimal list-inside mb-4 space-y-1 ml-4">{children}</ol>,
                         li: ({ children }) => <li className="mb-1">{children}</li>,
