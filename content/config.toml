@@ -7,7 +7,7 @@ favicon = "/favicon.svg"
 name = "Yang Lyu"
 title = "Robotics Algorithm Engineer"
 institution = "Motion Brain"
-avatar = ""
+avatar = "/yang-lyu.jpg"
 
 [social]
 email = "barathon121@gmail.com"
